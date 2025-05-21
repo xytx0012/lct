@@ -1,0 +1,77 @@
+server:
+  tomcat:
+    threads:
+      max: 200       # 最大线程数，默认200
+      min-spare: 20  # 最小空闲线程，默认10
+    max-connections: 1000  # 最大连接数，默认10000
+    accept-count: 100      # 等待队列长度，默认100
+    connection-timeout: 20000  # 连接超时时间(ms)
+spring:
+  application:
+    name: jcb-dataservice
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.35.108:3306/jcb?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai
+    username: root
+    password: 123456
+    hikari:
+      connection-timeout: 30000
+      maximum-pool-size: 20
+      minimum-idle: 10
+      idle-timeout: 600000
+      max-lifetime: 1800000
+      auto-commit: true
+      pool-name: MyHikariCP
+  data:
+    redis:
+      host: 192.168.35.108
+      port: 6379
+      password: 123456
+      database: 7
+  rabbitmq:
+    host: 192.168.35.108
+    port: 5672
+    username: admin
+    password: 123456
+    virtual-host: powernode
+    publisher-confirm-type: correlated
+    publisher-returns: true
+
+
+mybatis:
+  mapper-locations: classpath:/mapper/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true
+
+dubbo:
+  application:
+    name: jcb-dataservice
+    qos-enable: false
+    serialize-check-status: WARN
+  protocol:
+    name: dubbo
+    port: 20880
+  registry:
+    address: zookeeper://192.168.35.108:2181
+  scan:
+    base-packages: com.xytx.service
+  provider:
+    timeout: 50000
+    retries: 0
+
+
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+  params: count=countSql
+
+jcb:
+  config:
+    password-salt: wdadasdaw153adw
+
+my:
+  exchangeName: invest.exchange
+  queueName: invest.queue
+  topic: invest

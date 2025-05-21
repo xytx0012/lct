@@ -1,0 +1,42 @@
+spring:
+  application:
+    name: jcb-consumer
+  rabbitmq:
+    host: 192.168.35.108
+    port: 5672
+    username: admin
+    password: 123456
+    virtual-host: powernode
+    listener:
+      simple:
+        acknowledge-mode: manual
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.35.108:3306/jcb?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai
+    username: root
+    password: 123456
+
+mybatis:
+  mapper-locations: classpath:/mapper/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true
+
+
+dubbo:
+  application:
+    name: jcb-consumer
+    enable-file-cache: false
+  protocol:
+    name: dubbo
+    port: 20888
+  registry:
+    address: zookeeper://192.168.35.108:2181
+  scan:
+    base-packages: com.xytx.consumer
+  consumer:
+    check: false
+    timeout: 50000
+    retries: 0
+
+

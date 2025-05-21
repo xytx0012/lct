@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: jcb-task
+
+dubbo:
+  application:
+    name: jcb-task
+    enable-file-cache: false
+  protocol:
+    name: dubbo
+    port: 20882
+  registry:
+    address: zookeeper://192.168.35.108:2181
+  scan:
+    base-packages: com.xytx.task
+  consumer:
+    check: false
+    timeout: 50000
+    retries: 0
+
+

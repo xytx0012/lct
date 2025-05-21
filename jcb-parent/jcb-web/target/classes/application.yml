@@ -1,0 +1,48 @@
+spring:
+  application:
+    name: jcb-web
+  data:
+    redis:
+      host: 192.168.35.108
+      port: 6379
+      password: 123456
+      database: 7
+server:
+  port: 8081
+  servlet:
+    context-path: /api
+    encoding:
+      enabled: true
+      charset: UTF-8
+      force: true
+  tomcat:
+    threads:
+      max: 200       # 最大线程数，默认200
+      min-spare: 20  # 最小空闲线程，默认10
+    max-connections: 1000  # 最大连接数，默认10000
+    accept-count: 100      # 等待队列长度，默认100
+    connection-timeout: 20000  # 连接超时时间(ms)
+
+
+dubbo:
+  application:
+    name: jcb-web
+    qos-enable: false
+    serialize-check-status: WARN
+  protocol:
+    name: dubbo
+    port: 20881
+  registry:
+    address: zookeeper://192.168.35.108:2181
+  scan:
+    base-packages: com.xytx
+  consumer:
+    check: false
+    timeout: 50000
+    retries: 0
+
+
+
+
+
+
